@@ -225,6 +225,15 @@
               }
             },
             "files" : {
+                "/opt/splunk/etc/system/local/inputs.conf" : {
+                "content" : { "Fn::Join" : ["", [
+                  "[splunktcp]\n",
+                  "[splunktcp://8317]\n"
+                ]]},
+                "mode" : "000644",
+                "owner" : "root",
+                "group" : "root"
+              },
               "/opt/splunk/etc/system/local/web.conf" : {
                 "content" : { "Fn::Join" : ["", [
                   "[settings]\n",
