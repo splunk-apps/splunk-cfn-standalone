@@ -41,6 +41,16 @@
       "ConstraintDescription" : "can contain only numeric characters."
     },
 
+    "EbsVolumeSize" : {
+      "Description" : "EBS Volume Size (GB)",
+      "Type" : "String",
+      "Default" : "50",
+      "MinLength": "1",
+      "MaxLength": "4",
+      "AllowedPattern" : "[0-9]*",
+      "ConstraintDescription" : "can contain only numeric characters."
+    },
+
     "KeyName" : {
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the splunk server",
       "Type" : "String",
@@ -266,6 +276,14 @@
            { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName"} },
            { "Key" : "Owner", "Value" : { "Ref": "Owner" } },
            { "Key" : "Keep", "Value" : "Yes" }
+        ],
+        "BlockDeviceMappings": [
+           { "DeviceName": "/dev/xvda",
+             "Ebs": {
+               "VolumeSize": { "Ref": "EbsVolumeSize" },
+               "VolumeType": "standard"
+             }
+           }
         ],
         "UserData": {
           "Fn::Base64" : { "Fn::Join" : ["", [
